@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes')
+const cookieParser = require('cookie-parser');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 const app = express();
 
@@ -9,6 +11,9 @@ app.use(express.static('public'));
 
 //get json
 app.use(express.json())
+
+//
+app.use(cookieParser())
 
 // view engine
 app.set('view engine', 'ejs');
@@ -24,7 +29,8 @@ mongoose.connect(localDB, { useNewUrlParser: true, useUnifiedTopology: true, use
   mongoose.connection.once('open', () => console.log("Mongodb connection established successfully"))
 
 // routes
+app.get('*', checkUser)
 app.get('/', (req, res) => res.render('home'));
-app.get('/smoothies', (req, res) => res.render('smoothies'));
+app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
 
 app.use(authRoutes);

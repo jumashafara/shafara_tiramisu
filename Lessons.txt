@@ -1,0 +1,18 @@
+Step1: Create a node application
+Step2: Setup auth routes
+Step3: Setup auth controllers
+Step4: Register auth controllers in the node app
+
+#Handling data
+Step5: Create user models
+Step6: Validate data with mongoose
+Step7: Hash passwords using bcrypt
+Step8: Create front end (if not existing)
+Step9: Create jwt in the auth controllers
+Step10: Create auth middleware to protect routes
+Step11: 
+
+#Parts of the JWT
+	Headers
+	Payload
+	Signature
